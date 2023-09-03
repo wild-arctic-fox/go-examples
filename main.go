@@ -9,6 +9,7 @@ import (
 	"errors"
 	"fmt"
 	"reflect"
+	"strconv"
 	"strings"
 )
 
@@ -150,6 +151,66 @@ func main() {
 		fmt.Println(matrix[i])
 	}
 
+	// keyword defer - postpone execution until later (before panic)
+	printlnMagenta("Pure Magenta 1")
+
+	defer handlePanic()
+	defer printlnMagenta("defer Magenta 1") // second
+	defer printlnMagenta("defer Magenta 2") // first
+
+	printlnMagenta("Pure Magenta 2")
+
+	// func panic() - apps stop with exit status 2 (in cases of dynamic errors)
+	// panic("help")
+
+	// ///////////////////////////
+	/* MAP (like map or obj in js)
+	Maps are implemented as hash tables - This means that the average time complexity
+	for insertion, deletion, and retrieval (searching for a key) is O(1)
+	Iterating Over a Map: Iterating over a map using a for range loop has a time complexity of O(n),
+	as you need to visit each key-value pair once.
+	*/
+	// inilialize with elements
+	users := map[string]int{
+		"Jane":   78_000,
+		"Claire": 89_000,
+		"Patric": 2_500,
+	}
+
+	fmt.Println(users["Claire"]) // 89000
+	fmt.Println(users["No"])     // 0
+
+	// find by key
+	_, isExist := users["Claire"]
+
+	fmt.Println(isExist)
+
+	// add to map
+	users["Eve"] = 700_000
+
+	// delete from map
+	delete(users, "Patric")
+
+	for key, value := range users {
+		printlnGreen(key + " " + strconv.FormatInt(int64(value), 10))
+	}
+
+	// uninitialized map
+	var newMapUsers map[string]int
+	// initialize
+	newMapUsers = make(map[string]int, 100)
+
+	newMapUsers["Emily"] = 45_000
+
+}
+
+func handlePanic() {
+	// recover() built-in Go function used to handle panics
+	// r != nil => it means a panic occurred and was successfully recovered
+	r := recover()
+	if r != nil {
+		printlnCyan("Ignore panic")
+	}
 }
 
 func toUpperCase(inputString string) {
