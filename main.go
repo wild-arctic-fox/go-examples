@@ -40,12 +40,42 @@ func main() {
 	fmt.Println(time.Now())
 
 	currentTime := time.Now()
-    formattedTime := currentTime.Format("2006-01-02 15:04:05")
+	formattedTime := currentTime.Format("2006-01-02 15:04:05")
 	printlnCyan(formattedTime)
+
+	arrInt := []int{78, 90, 67}
+	fmt.Println(sum(arrInt))
+
+	arrFloat32 := []float32{78.00, 90.00, 67.0109}
+	printlnYellow((sum(arrFloat32)))
+
+	fmt.Println(find(arrInt, 90))
+	fmt.Println(find(arrFloat32, 67.0109))
+	printlnGreen(find(arrFloat32, 67.0101))
 
 }
 
+// comparable - every type exept of map|slice or stuct that contains map|slice
+func find[C comparable](arr []C, el C) bool {
+	res := false
+	for _, v := range arr {
+		if v == el {
+			res = true
+		}
+	}
+	return res
+}
+
+func sum[number int | float32](num []number) number {
+	var sum number
+	for _, v := range num {
+		sum += v
+	}
+	return sum
+}
+
 // type switch
+
 func getTypeName(x interface{}) string {
 	switch x.(type) {
 	case int:
@@ -78,32 +108,32 @@ func toUpperCasePointer(inputString *string) {
 	printlnRed(*inputString)
 }
 
-func printlnCyan(inputString string) {
-	println(fmt.Sprintf("\x1b[%dm%s\x1b[0m", 36, inputString))
+func printlnCyan[A any](inputString A) {
+	println(fmt.Sprintf("\x1b[%dm%s\x1b[0m", 36, fmt.Sprintf("%v", inputString)))
 }
 
-func printlnMagenta(inputString string) {
-	println(fmt.Sprintf("\x1b[%dm%s\x1b[0m", 35, inputString))
+func printlnMagenta[A any](inputString A) {
+	println(fmt.Sprintf("\x1b[%dm%s\x1b[0m", 35, fmt.Sprintf("%v", inputString)))
 }
 
-func printlnBlue(inputString string) {
-	println(fmt.Sprintf("\x1b[%dm%s\x1b[0m", 34, inputString))
+func printlnBlue[A any](inputString A) {
+	println(fmt.Sprintf("\x1b[%dm%s\x1b[0m", 34, fmt.Sprintf("%v", inputString)))
 }
 
-func printlnYellow(inputString string) {
-	println(fmt.Sprintf("\x1b[%dm%s\x1b[0m", 33, inputString))
+func printlnYellow[A any](inputString A) {
+	println(fmt.Sprintf("\x1b[%dm%s\x1b[0m", 33, fmt.Sprintf("%v", inputString)))
 }
 
-func printlnGreen(inputString string) {
-	println(fmt.Sprintf("\x1b[%dm%s\x1b[0m", 32, inputString))
+func printlnGreen[A any](inputString A) {
+	println(fmt.Sprintf("\x1b[%dm%s\x1b[0m", 32, fmt.Sprintf("%v", inputString)))
 }
 
-func printlnRed(inputString string) {
-	println(fmt.Sprintf("\x1b[%dm%s\x1b[0m", 31, inputString))
+func printlnRed[A any](inputString A) {
+	println(fmt.Sprintf("\x1b[%dm%s\x1b[0m", 31, fmt.Sprintf("%v", inputString)))
 }
 
-func printlnBlack(inputString string) {
-	println(fmt.Sprintf("\x1b[%dm%s\x1b[0m", 30, inputString))
+func printlnBlack[A any](inputString A) {
+	println(fmt.Sprintf("\x1b[%dm%s\x1b[0m", 30, fmt.Sprintf("%v", inputString)))
 }
 
 // func roundInc() func() uint8 {
