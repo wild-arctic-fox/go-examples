@@ -13,6 +13,8 @@ type HttpClient struct {
 }
 
 func NewHTTPClient(timeout time.Duration) (*HttpClient, error) {
+	// http.DefaultClient - empty client, same as &http.Client{}
+	// response, err := http.DefaultClient.Get("https://dummyjson.com/products/1?jane=qwerty")
 	return &HttpClient{
 		Client: &http.Client{
 			Timeout: timeout,
